@@ -235,16 +235,6 @@ public class AnaEkran extends AppCompatActivity {
         final int mer2 = Character.getNumericValue(value51);
 
 
-
-
-
-
-
-        // birbir.setVisibility(View.INVISIBLE); gorunmezlik iksiri
-
-
-        //Toast.makeText(this, String.valueOf(a), Toast.LENGTH_SHORT).show();
-
         Button dogrula = (Button) findViewById(R.id.dogrula);
         dogrula.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -258,6 +248,8 @@ public class AnaEkran extends AppCompatActivity {
                     Toast.makeText(AnaEkran.this, "Satir veya sutun 5'den buyuk olamaz!", Toast.LENGTH_SHORT).show();
 
                 }
+
+                // kutulari acma/kapama kodlamasi
 
                 else {
 
@@ -397,6 +389,7 @@ public class AnaEkran extends AppCompatActivity {
                     if(z1 <= str && z2 <= stn) {
                         dortbes.setVisibility(View.VISIBLE);
                     }
+
                     else {
                         dortbes.setVisibility(View.INVISIBLE);
                     }
@@ -438,128 +431,1033 @@ public class AnaEkran extends AppCompatActivity {
 
                 }
 
-
             }
         });
 
-
         final List<Integer> integerList = new ArrayList<Integer>();
+        final TextView sonuc = (TextView) findViewById(R.id.textView11);
 
         final Button hesapla = (Button) findViewById(R.id.hesapla);
         hesapla.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if(TextUtils.isEmpty(birbir.getText()) == false) { //bos mu dolu mu kontrolu
-                    integerList.add(Integer.parseInt(birbir.getText().toString()));
+                final int str2 = Integer.parseInt(satir.getText().toString().trim());
+                final int stn2 = Integer.parseInt(sutun.getText().toString().trim());
+
+
+                if(str2 == 1 && stn2 == 1) {
+                    Toast.makeText(AnaEkran.this, "1x1 matrisin determinanti olamaz!", Toast.LENGTH_SHORT).show();
                 }
 
-                if(TextUtils.isEmpty(birbir.getText()) == false) {
-                    integerList.add(Integer.parseInt(biriki.getText().toString()));
+                else if(str2 == 2 && stn2 == 2) { // 2x2 matrisin determinanti
+
+                    int a = Integer.parseInt(birbir.getText().toString().trim());
+                        int b = Integer.parseInt(biriki.getText().toString().trim());
+                        int c = Integer.parseInt(ikibir.getText().toString().trim());
+                    int d = Integer.parseInt(ikiiki.getText().toString().trim());
+
+                    int determinant1 = ((a * d) - (c * b));
+                    Toast.makeText(AnaEkran.this, String.valueOf(determinant1), Toast.LENGTH_SHORT).show();
+                    sonuc.setText(String.valueOf(determinant1));
+
                 }
 
-                if(TextUtils.isEmpty(birbir.getText()) == false) {
-                    integerList.add(Integer.parseInt(biruc.getText().toString()));
+                else if(str2 == 3 && stn2 == 3) { // 3x3 matrisin determinanti
+
+                    int a = Integer.parseInt(birbir.getText().toString().trim());
+                        int b = Integer.parseInt(biriki.getText().toString().trim());
+                            int c = Integer.parseInt(biruc.getText().toString().trim());
+                                int d = Integer.parseInt(ikibir.getText().toString().trim());
+                                    int e = Integer.parseInt(ikiiki.getText().toString().trim());
+                                int f = Integer.parseInt(ikiuc.getText().toString().trim());
+                            int g = Integer.parseInt(ucbir.getText().toString().trim());
+                        int h = Integer.parseInt(uciki.getText().toString().trim());
+                    int i = Integer.parseInt(ucuc.getText().toString().trim());
+
+                    int determinant = (a * ((e*i)-(h*f))) -
+                                      (b * ((d*i)-(g*f))) +
+                                      (c * ((d*h)-(e*g)));
+
+                    Toast.makeText(AnaEkran.this, String.valueOf(determinant), Toast.LENGTH_SHORT).show();
+                    sonuc.setText(String.valueOf(determinant));
+
                 }
 
-                if(TextUtils.isEmpty(birbir.getText()) == false) {
-                    integerList.add(Integer.parseInt(birdort.getText().toString()));
+                else if(str2 == 4 && stn2 == 4) { // 4x4 matrisin determinanti
+
+                    int a = Integer.parseInt(birbir.getText().toString().trim());
+                        int b = Integer.parseInt(biriki.getText().toString().trim());
+                            int c = Integer.parseInt(biruc.getText().toString().trim());
+                                int d = Integer.parseInt(birdort.getText().toString().trim());
+                                    int e = Integer.parseInt(ikibir.getText().toString().trim());
+                                        int f = Integer.parseInt(ikiiki.getText().toString().trim());
+                                            int g = Integer.parseInt(ikiuc.getText().toString().trim());
+                                                int h = Integer.parseInt(ikidort.getText().toString().trim());
+                                                int i = Integer.parseInt(ucbir.getText().toString().trim());
+                                            int j = Integer.parseInt(uciki.getText().toString().trim());
+                                        int k = Integer.parseInt(ucuc.getText().toString().trim());
+                                    int l = Integer.parseInt(ucdort.getText().toString().trim());
+                                int m = Integer.parseInt(dortbir.getText().toString().trim());
+                            int n = Integer.parseInt(dortiki.getText().toString().trim());
+                        int o = Integer.parseInt(dortuc.getText().toString().trim());
+                    int p = Integer.parseInt(dortdort.getText().toString().trim());
+
+
+                    int minor1 =   (a * ((f * ((k*p)-(o*l)))
+                                   - (g * ((j*p)-(n*l)))
+                                   + (h * ((j*o)-(n*k)))));
+
+                    int minor2 =  (b * ((e * ((k*p)-(o*l)))
+                                 - (g * ((i*p)-(m*l)))
+                                 + (h * ((i*o)-(m*k)))));
+
+                    int minor3 =  (c * ((e * ((j*p)-(n*l)))
+                                - (f * ((i*p)-(m*l)))
+                                + (h * ((i*n)-(m*j)))));
+
+                    int minor4 = (d * ((e * ((j*o)-(n*k)))
+                                  - (f * ((i*o)-(m*k)))
+                                  + (g * ((i*n)-(m*j)))));
+
+                    int determinant = minor1 - minor2 + minor3 - minor4;
+                    Toast.makeText(AnaEkran.this, String.valueOf(determinant), Toast.LENGTH_SHORT).show();
+                    sonuc.setText(String.valueOf(determinant));
+
+
                 }
 
-                if(TextUtils.isEmpty(birbir.getText()) == false) {
-                    integerList.add(Integer.parseInt(birbes.getText().toString()));
+                else if(str2 == 5 && stn2 == 5) {
+
+                    int a = Integer.parseInt(birbir.getText().toString().trim());
+                    int b = Integer.parseInt(biriki.getText().toString().trim());
+                    int c = Integer.parseInt(biruc.getText().toString().trim());
+                    int d = Integer.parseInt(birdort.getText().toString().trim());
+                    int e = Integer.parseInt(birbes.getText().toString().trim());
+                    int f = Integer.parseInt(ikibir.getText().toString().trim());
+                    int g = Integer.parseInt(ikiiki.getText().toString().trim());
+                    int h = Integer.parseInt(ikiuc.getText().toString().trim());
+                    int i = Integer.parseInt(ikidort.getText().toString().trim());
+                    int j = Integer.parseInt(ikibes.getText().toString().trim());
+                    int k = Integer.parseInt(ucbir.getText().toString().trim());
+                    int l = Integer.parseInt(uciki.getText().toString().trim());
+                    int m = Integer.parseInt(ucuc.getText().toString().trim());
+                    int n = Integer.parseInt(ucdort.getText().toString().trim());
+                    int o = Integer.parseInt(ucbes.getText().toString().trim());
+                    int p = Integer.parseInt(dortbir.getText().toString().trim());
+                    int r = Integer.parseInt(dortiki.getText().toString().trim());
+                    int s = Integer.parseInt(dortuc.getText().toString().trim());
+                    int t = Integer.parseInt(dortdort.getText().toString().trim());
+                    int u = Integer.parseInt(dortbes.getText().toString().trim());
+                    int w = Integer.parseInt(besbir.getText().toString().trim());
+                    int y = Integer.parseInt(besiki.getText().toString().trim());
+                    int z = Integer.parseInt(besuc.getText().toString().trim());
+                    int x = Integer.parseInt(besdort.getText().toString().trim());
+                    int q = Integer.parseInt(besbes.getText().toString().trim());
+
+
+                    int minor1 =   (a *  (g * ((m * ((t*q)-(x*u)))
+                                              -(n * ((s*q)-(z*u)))
+                                              +(o * ((s*x)-(z*t)))))
+                            -
+                                         (h * ((l * ((t*q)-(x*u)))
+                                              -(n * ((r*q)-(y*u)))
+                                              +(o * ((r*x)-(y*t)))))
+                            +
+                                         (i * ((l * ((s*q)-(z*u)))
+                                              -(m * ((r*q)-(y*u)))
+                                              +(o * ((r*z)-(y*s)))))
+                            -
+                                         (j * ((l * ((s*x)-(z*t)))
+                                              -(m * ((r*x)-(y*t)))
+                                              +(n * ((r*z)-(y*s))))));
+
+                    int minor2 =   (b * (f * ((m * ((t*q)-(x*u)))
+                                             -(n * ((s*q)-(z*u)))
+                                             +(o * ((s*x)-(z*t)))))
+                            -
+                                        (h * ((k * ((t*q)-(x*u)))
+                                             -(n * ((p*q)-(w*u)))
+                                             +(o * ((p*x)-(w*t)))))
+                            +
+                                        (i * ((k * ((s*q)-(z*u)))
+                                             -(m * ((p*q)-(w*u)))
+                                             +(o * ((p*z)-(w*s)))))
+                            -
+                                         (j *  ((k * ((s*x)-(z*t)))
+                                               -(m * ((p*x)-(w*t)))
+                                               +(n * ((p*z)-(w*s))))));
+
+                    int minor3 =   (c * (f * ((l * ((t*q)-(x*u)))
+                                             -(n * ((r*q)-(y*u)))
+                                             +(o * ((r*x)-(y*t)))))
+                            -
+                                            (g * ((k * ((t*q)-(x*u)))
+                                                 -(l * ((p*q)-(w*u)))
+                                                 +(o * ((p*x)-(w*t)))))
+                            +
+                                            (i * ((k * ((r*q)-(y*u)))
+                                                 -(l * ((p*q)-(w*u)))
+                                                 +(o * ((p*y)-(w*r)))))
+                            -
+                                            (j * ((k * ((r*x)-(y*t)))
+                                                 -(l * ((p*x)-(w*t)))
+                                                 +(n * ((p*y)-(w*r))))));
+
+                    int minor4 =   (d *  (f * ((l * ((s*q)-(z*u)))
+                                              -(m * ((r*q)-(y*u)))
+                                              +(o * ((r*z)-(y*z)))))
+                            -
+                                         (g * ((k * ((s*q)-(z*u)))
+                                              -(m * ((p*q)-(w*u)))
+                                              +(o * ((p*z)-(w*s)))))
+                            +
+                                          (h * ((k * ((r*q)-(y*u)))
+                                               -(l * ((p*q)-(w*u)))
+                                               +(o * ((p*y)-(w*r)))))
+                            -
+                                          (j * ((k * ((r*z)-(y*s)))
+                                               -(l * ((p*z)-(w*s)))
+                                               +(m * ((p*y)-(w*r))))));
+
+                    int minor5 =   (e *  (f * ((l * ((s*x)-(z*t)))
+                                              -(m * ((r*x)-(y*t)))
+                                              +(n * ((r*z)-(y*s)))))
+                            -
+                                        (g * ((k * ((s*x)-(z*t)))
+                                             -(m * ((p*x)-(w*t)))
+                                             +(n * ((p*z)-(w*s)))))
+                            +
+                                        (h * ((k * ((r*x)-(y*t)))
+                                             -(l * ((p*x)-(w*t)))
+                                             +(n * ((p*y)-(w*r)))))
+                            -
+                                        (i * ((k * ((r*z)-(y*s)))
+                                             -(l * ((p*z)-(w*s)))
+                                             +(m * ((p*y)-(w*r))))));
+
+
+                    int determinant = minor1 - minor2 + minor3 - minor4 + minor5;
+                    Toast.makeText(AnaEkran.this, String.valueOf(determinant), Toast.LENGTH_SHORT).show();
+                    sonuc.setText(String.valueOf(determinant));
+
                 }
-
-                if(TextUtils.isEmpty(birbir.getText()) == false) {
-                    integerList.add(Integer.parseInt(ikibir.getText().toString()));
+                else {
+                    Toast.makeText(AnaEkran.this, "Bir matrisin determinantinin olmasi icin kare matris olmak gerekmektedir", Toast.LENGTH_SHORT).show();
                 }
-
-                if(TextUtils.isEmpty(birbir.getText()) == false) {
-                    integerList.add(Integer.parseInt(ikiiki.getText().toString()));
-                }
-
-                if(TextUtils.isEmpty(birbir.getText()) == false) {
-                    integerList.add(Integer.parseInt(ikiuc.getText().toString()));
-                }
-
-                if(TextUtils.isEmpty(birbir.getText()) == false) {
-                    integerList.add(Integer.parseInt(ikidort.getText().toString()));
-                }
-
-                if(TextUtils.isEmpty(birbir.getText()) == false) {
-                    integerList.add(Integer.parseInt(ikibes.getText().toString()));
-                }
-
-                if(TextUtils.isEmpty(birbir.getText()) == false) {
-                    integerList.add(Integer.parseInt(ucbir.getText().toString()));
-                }
-
-                if(TextUtils.isEmpty(birbir.getText()) == false) {
-                    integerList.add(Integer.parseInt(uciki.getText().toString()));
-                }
-
-                if(TextUtils.isEmpty(birbir.getText()) == false) {
-                    integerList.add(Integer.parseInt(ucuc.getText().toString()));
-                }
-
-                if(TextUtils.isEmpty(birbir.getText()) == false) {
-                    integerList.add(Integer.parseInt(ucdort.getText().toString()));
-                }
-
-                if(TextUtils.isEmpty(birbir.getText()) == false) {
-                    integerList.add(Integer.parseInt(ucbes.getText().toString()));
-                }
-
-                if(TextUtils.isEmpty(birbir.getText()) == false) {
-                    integerList.add(Integer.parseInt(dortbir.getText().toString()));
-                }
-
-                if(TextUtils.isEmpty(birbir.getText()) == false) {
-                    integerList.add(Integer.parseInt(dortiki.getText().toString()));
-                }
-
-                if(TextUtils.isEmpty(birbir.getText()) == false) {
-                    integerList.add(Integer.parseInt(dortuc.getText().toString()));
-                }
-
-                if(TextUtils.isEmpty(birbir.getText()) == false) {
-                    integerList.add(Integer.parseInt(dortdort.getText().toString()));
-                }
-
-                if(TextUtils.isEmpty(birbir.getText()) == false) {
-                    integerList.add(Integer.parseInt(dortbes.getText().toString()));
-                }
-
-                if(TextUtils.isEmpty(birbir.getText()) == false) {
-                    integerList.add(Integer.parseInt(besbir.getText().toString()));
-                }
-
-                if(TextUtils.isEmpty(birbir.getText()) == false) {
-                    integerList.add(Integer.parseInt(besiki.getText().toString()));
-                }
-
-                if(TextUtils.isEmpty(birbir.getText()) == false) {
-                    integerList.add(Integer.parseInt(besuc.getText().toString()));
-                }
-
-                if(TextUtils.isEmpty(birbir.getText()) == false) {
-                    integerList.add(Integer.parseInt(besdort.getText().toString()));
-                }
-
-                if(TextUtils.isEmpty(birbir.getText()) == false) {
-                    integerList.add(Integer.parseInt(besbes.getText().toString()));
-                }
-
-                /*
-                int sum = 0;
-                for(int sayac = 0; sayac < integerList.size(); sayac++) {
-                    sum += integerList.get(sayac);
-                } */
-
-                Toast.makeText(AnaEkran.this, Arrays.toString(integerList.toArray()), Toast.LENGTH_SHORT).show();
 
             }
         });
+
+
+        Button transpoze= (Button) findViewById(R.id.transpoze);
+        transpoze.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                final int str3 = Integer.parseInt(satir.getText().toString().trim());
+                final int stn3 = Integer.parseInt(sutun.getText().toString().trim());
+
+
+                if(str3 == 1 && stn3 == 2) {
+
+                    int a = Integer.parseInt(birbir.getText().toString().trim());
+                    int b = Integer.parseInt(biriki.getText().toString().trim());
+
+                    biriki.setVisibility(View.INVISIBLE);
+
+                    ikibir.setVisibility(View.VISIBLE);
+
+                    birbir.setText(String.valueOf(a));
+                    ikibir.setText(String.valueOf(b));
+
+                }
+
+                else if(str3 == 1 && stn3 == 3) {
+
+                    int a = Integer.parseInt(birbir.getText().toString().trim());
+                    int b = Integer.parseInt(biriki.getText().toString().trim());
+                    int c = Integer.parseInt(biruc.getText().toString().trim());
+
+                    biriki.setVisibility(View.INVISIBLE);
+                    biruc.setVisibility(View.INVISIBLE);
+
+
+                    ikibir.setVisibility(View.VISIBLE);
+                    ucbir.setVisibility(View.VISIBLE);
+
+                    birbir.setText(String.valueOf(a));
+                    ikibir.setText(String.valueOf(b));
+                    ucbir.setText(String.valueOf(c));
+
+                }
+
+                else if(str3 == 1 && stn3 == 4) {
+
+                    int a = Integer.parseInt(birbir.getText().toString().trim());
+                    int b = Integer.parseInt(biriki.getText().toString().trim());
+                    int c = Integer.parseInt(biruc.getText().toString().trim());
+                    int d = Integer.parseInt(birdort.getText().toString().trim());
+
+                    biriki.setVisibility(View.INVISIBLE);
+                    biruc.setVisibility(View.INVISIBLE);
+                    birdort.setVisibility(View.INVISIBLE);
+
+                    ikibir.setVisibility(View.VISIBLE);
+                    ucbir.setVisibility(View.VISIBLE);
+                    dortbir.setVisibility(View.VISIBLE);
+
+                    birbir.setText(String.valueOf(a));
+                    ikibir.setText(String.valueOf(b));
+                    ucbir.setText(String.valueOf(c));
+                    dortbir.setText(String.valueOf(d));
+
+                }
+
+                else if(str3 == 1 && stn3 == 5) {
+
+                    int a = Integer.parseInt(birbir.getText().toString().trim());
+                    int b = Integer.parseInt(biriki.getText().toString().trim());
+                    int c = Integer.parseInt(biruc.getText().toString().trim());
+                    int d = Integer.parseInt(birdort.getText().toString().trim());
+                    int e = Integer.parseInt(birbes.getText().toString().trim());
+
+                    biriki.setVisibility(View.INVISIBLE);
+                    biruc.setVisibility(View.INVISIBLE);
+                    birdort.setVisibility(View.INVISIBLE);
+                    birbes.setVisibility(View.INVISIBLE);
+
+                    ikibir.setVisibility(View.VISIBLE);
+                    ucbir.setVisibility(View.VISIBLE);
+                    dortbir.setVisibility(View.VISIBLE);
+                    besbir.setVisibility(View.VISIBLE);
+
+                    birbir.setText(String.valueOf(a));
+                    ikibir.setText(String.valueOf(b));
+                    ucbir.setText(String.valueOf(c));
+                    dortbir.setText(String.valueOf(d));
+                    besbir.setText(String.valueOf(e));
+
+                }
+
+                else if(str3 == 2 && stn3 == 1) {
+
+                    int a = Integer.parseInt(birbir.getText().toString().trim());
+                    int b = Integer.parseInt(ikibir.getText().toString().trim());
+
+                    ikibir.setVisibility(View.INVISIBLE);
+
+                    biriki.setVisibility(View.VISIBLE);
+
+                    birbir.setText(String.valueOf(a));
+                    biriki.setText(String.valueOf(b));
+
+                }
+
+                else if(str3 == 2 && stn3 == 2) {
+
+                    int b = Integer.parseInt(biriki.getText().toString().trim());
+                    int c = Integer.parseInt(ikibir.getText().toString().trim());
+
+                    biriki.setText(String.valueOf(c));
+                    ikibir.setText(String.valueOf(b));
+
+                }
+
+                else if(str3 == 2 && stn3 == 3) {
+
+                    int a = Integer.parseInt(birbir.getText().toString().trim());
+                    int b = Integer.parseInt(biriki.getText().toString().trim());
+                    int c = Integer.parseInt(biruc.getText().toString().trim());
+                    int d = Integer.parseInt(ikibir.getText().toString().trim());
+                    int e = Integer.parseInt(ikiiki.getText().toString().trim());
+                    int f = Integer.parseInt(ikiuc.getText().toString().trim());
+
+                    biruc.setVisibility(View.INVISIBLE);
+                    ikiuc.setVisibility(View.INVISIBLE);
+
+                    ucbir.setVisibility(View.VISIBLE);
+                    uciki.setVisibility(View.VISIBLE);
+
+                    biriki.setText(String.valueOf(d));
+                    ikibir.setText(String.valueOf(b));
+                    ikiiki.setText(String.valueOf(e));
+                    ucbir.setText(String.valueOf(c));
+                    uciki.setText(String.valueOf(f));
+
+                }
+
+                else if(str3 == 2 && stn3 == 4) {
+
+                    int a = Integer.parseInt(birbir.getText().toString().trim());
+                    int b = Integer.parseInt(biriki.getText().toString().trim());
+                    int c = Integer.parseInt(biruc.getText().toString().trim());
+                    int d = Integer.parseInt(birdort.getText().toString().trim());
+                    int e = Integer.parseInt(ikibir.getText().toString().trim());
+                    int f = Integer.parseInt(ikiiki.getText().toString().trim());
+                    int g = Integer.parseInt(ikiuc.getText().toString().trim());
+                    int h = Integer.parseInt(ikidort.getText().toString().trim());
+
+                    biruc.setVisibility(View.INVISIBLE);
+                    ikiuc.setVisibility(View.INVISIBLE);
+                    birdort.setVisibility(View.INVISIBLE);
+                    ikidort.setVisibility(View.INVISIBLE);
+
+                    ucbir.setVisibility(View.VISIBLE);
+                    uciki.setVisibility(View.VISIBLE);
+                    dortbir.setVisibility(View.VISIBLE);
+                    dortiki.setVisibility(View.VISIBLE);
+
+
+                    biriki.setText(String.valueOf(e));
+                    ikibir.setText(String.valueOf(b));
+                    ikiiki.setText(String.valueOf(f));
+                    ucbir.setText(String.valueOf(c));
+                    uciki.setText(String.valueOf(g));
+                    dortbir.setText(String.valueOf(d));
+                    dortiki.setText(String.valueOf(h));
+
+                }
+
+                else if(str3 == 2 && stn3 == 5) {
+
+                    int a = Integer.parseInt(birbir.getText().toString().trim());
+                    int b = Integer.parseInt(biriki.getText().toString().trim());
+                    int c = Integer.parseInt(biruc.getText().toString().trim());
+                    int d = Integer.parseInt(birdort.getText().toString().trim());
+                    int e = Integer.parseInt(birbes.getText().toString().trim());
+                    int f = Integer.parseInt(ikibir.getText().toString().trim());
+                    int g = Integer.parseInt(ikiiki.getText().toString().trim());
+                    int h = Integer.parseInt(ikiuc.getText().toString().trim());
+                    int i = Integer.parseInt(ikidort.getText().toString().trim());
+                    int j = Integer.parseInt(ikibes.getText().toString().trim());
+
+                    biruc.setVisibility(View.INVISIBLE);
+                    ikiuc.setVisibility(View.INVISIBLE);
+                    birdort.setVisibility(View.INVISIBLE);
+                    ikidort.setVisibility(View.INVISIBLE);
+                    birbes.setVisibility(View.INVISIBLE);
+                    ikibes.setVisibility(View.INVISIBLE);
+
+                    ucbir.setVisibility(View.VISIBLE);
+                    uciki.setVisibility(View.VISIBLE);
+                    dortbir.setVisibility(View.VISIBLE);
+                    dortiki.setVisibility(View.VISIBLE);
+                    besbir.setVisibility(View.VISIBLE);
+                    besiki.setVisibility(View.VISIBLE);
+
+                    biriki.setText(String.valueOf(f));
+                    ikibir.setText(String.valueOf(b));
+                    ikiiki.setText(String.valueOf(g));
+                    ucbir.setText(String.valueOf(c));
+                    uciki.setText(String.valueOf(h));
+                    dortbir.setText(String.valueOf(d));
+                    dortiki.setText(String.valueOf(i));
+                    besbir.setText(String.valueOf(e));
+                    besiki.setText(String.valueOf(j));
+
+                }
+
+                else if(str3 == 3 && stn3 == 1) {
+
+                    int b = Integer.parseInt(ikibir.getText().toString().trim());
+                    int c = Integer.parseInt(ucbir.getText().toString().trim());
+
+                    ikibir.setVisibility(View.INVISIBLE);
+                    ucbir.setVisibility(View.INVISIBLE);
+
+
+                    biriki.setVisibility(View.VISIBLE);
+                    biruc.setVisibility(View.VISIBLE);
+
+                    biriki.setText(String.valueOf(b));
+                    biruc.setText(String.valueOf(c));
+
+                }
+
+                else if(str3 == 3 && stn3 == 2) {
+
+                    int b = Integer.parseInt(biriki.getText().toString().trim());
+                    int c = Integer.parseInt(ikibir.getText().toString().trim());
+                    int d = Integer.parseInt(ikiiki.getText().toString().trim());
+                    int e = Integer.parseInt(ucbir.getText().toString().trim());
+                    int f = Integer.parseInt(uciki.getText().toString().trim());
+
+
+                    ucbir.setVisibility(View.INVISIBLE);
+                    uciki.setVisibility(View.INVISIBLE);
+
+
+                    biruc.setVisibility(View.VISIBLE);
+                    ikiuc.setVisibility(View.VISIBLE);
+
+                    biriki.setText(String.valueOf(c));
+                    biruc.setText(String.valueOf(e));
+                    ikibir.setText(String.valueOf(b));
+                    ikiiki.setText(String.valueOf(d));
+                    ikiuc.setText(String.valueOf(f));
+
+                }
+
+                else if(str3 == 3 && stn3 == 3) {
+
+                    int b = Integer.parseInt(biriki.getText().toString().trim());
+                    int c = Integer.parseInt(biruc.getText().toString().trim());
+                    int d = Integer.parseInt(ikibir.getText().toString().trim());
+                    int e = Integer.parseInt(ikiiki.getText().toString().trim());
+                    int f = Integer.parseInt(ikiuc.getText().toString().trim());
+                    int g = Integer.parseInt(ucbir.getText().toString().trim());
+                    int h = Integer.parseInt(uciki.getText().toString().trim());
+                    int i = Integer.parseInt(ucuc.getText().toString().trim());
+
+                    biriki.setText(String.valueOf(d));
+                    biruc.setText(String.valueOf(g));
+                    ikibir.setText(String.valueOf(b));
+                    ikiiki.setText(String.valueOf(e));
+                    ikiuc.setText(String.valueOf(h));
+                    ucbir.setText(String.valueOf(c));
+                    uciki.setText(String.valueOf(f));
+                    ucuc.setText(String.valueOf(i));
+
+                }
+
+
+                else if(str3 == 3 && stn3 == 4) {
+
+                    int b = Integer.parseInt(biriki.getText().toString().trim());
+                    int c = Integer.parseInt(biruc.getText().toString().trim());
+                    int d = Integer.parseInt(birdort.getText().toString().trim());
+                    int e = Integer.parseInt(ikibir.getText().toString().trim());
+                    int f = Integer.parseInt(ikiiki.getText().toString().trim());
+                    int g = Integer.parseInt(ikiuc.getText().toString().trim());
+                    int h = Integer.parseInt(ikidort.getText().toString().trim());
+                    int i = Integer.parseInt(ucbir.getText().toString().trim());
+                    int j = Integer.parseInt(uciki.getText().toString().trim());
+                    int k = Integer.parseInt(ucuc.getText().toString().trim());
+                    int l = Integer.parseInt(ucdort.getText().toString().trim());
+
+                    birdort.setVisibility(View.INVISIBLE);
+                    ikidort.setVisibility(View.INVISIBLE);
+                    ucdort.setVisibility(View.INVISIBLE);
+
+                    dortbir.setVisibility(View.VISIBLE);
+                    dortiki.setVisibility(View.VISIBLE);
+                    dortuc.setVisibility(View.VISIBLE);
+
+
+                    biriki.setText(String.valueOf(e));
+                    biruc.setText(String.valueOf(i));
+                    ikibir.setText(String.valueOf(b));
+                    ikiiki.setText(String.valueOf(f));
+                    ikiuc.setText(String.valueOf(j));
+                    ucbir.setText(String.valueOf(c));
+                    uciki.setText(String.valueOf(g));
+                    ucuc.setText(String.valueOf(k));
+                    dortbir.setText(String.valueOf(d));
+                    dortiki.setText(String.valueOf(h));
+                    dortuc.setText(String.valueOf(l));
+
+                }
+
+                else if(str3 == 3 && stn3 == 5) {
+
+                    int b = Integer.parseInt(biriki.getText().toString().trim());
+                    int c = Integer.parseInt(biruc.getText().toString().trim());
+                    int d = Integer.parseInt(birdort.getText().toString().trim());
+                    int e = Integer.parseInt(ikibir.getText().toString().trim());
+                    int f = Integer.parseInt(ikiiki.getText().toString().trim());
+                    int g = Integer.parseInt(ikiuc.getText().toString().trim());
+                    int h = Integer.parseInt(ikidort.getText().toString().trim());
+                    int i = Integer.parseInt(ucbir.getText().toString().trim());
+                    int j = Integer.parseInt(uciki.getText().toString().trim());
+                    int k = Integer.parseInt(ucuc.getText().toString().trim());
+                    int l = Integer.parseInt(ucdort.getText().toString().trim());
+                    int m = Integer.parseInt(uciki.getText().toString().trim());
+                    int n = Integer.parseInt(ucuc.getText().toString().trim());
+                    int o = Integer.parseInt(ucdort.getText().toString().trim());
+
+                    birbes.setVisibility(View.INVISIBLE);
+                    ikibes.setVisibility(View.INVISIBLE);
+                    ucbes.setVisibility(View.INVISIBLE);
+                    birdort.setVisibility(View.INVISIBLE);
+                    ikidort.setVisibility(View.INVISIBLE);
+                    ucdort.setVisibility(View.INVISIBLE);
+
+                    besbir.setVisibility(View.VISIBLE);
+                    besiki.setVisibility(View.VISIBLE);
+                    besuc.setVisibility(View.VISIBLE);
+                    dortbir.setVisibility(View.VISIBLE);
+                    dortiki.setVisibility(View.VISIBLE);
+                    dortuc.setVisibility(View.VISIBLE);
+
+                    biriki.setText(String.valueOf(f));
+                    biruc.setText(String.valueOf(k));
+                    ikibir.setText(String.valueOf(b));
+                    ikiiki.setText(String.valueOf(g));
+                    ikiuc.setText(String.valueOf(l));
+                    ucbir.setText(String.valueOf(c));
+                    uciki.setText(String.valueOf(h));
+                    ucuc.setText(String.valueOf(m));
+                    dortbir.setText(String.valueOf(d));
+                    dortiki.setText(String.valueOf(i));
+                    dortuc.setText(String.valueOf(n));
+                    besbir.setText(String.valueOf(e));
+                    besiki.setText(String.valueOf(j));
+                    besuc.setText(String.valueOf(o));
+
+                }
+
+                if(str3 == 4 && stn3 == 1) {
+
+                    int a = Integer.parseInt(ikibir.getText().toString().trim());
+                    int b = Integer.parseInt(ucbir.getText().toString().trim());
+                    int c = Integer.parseInt(dortbir.getText().toString().trim());
+
+                    ikibir.setVisibility(View.INVISIBLE);
+                    ucbir.setVisibility(View.INVISIBLE);
+                    dortbir.setVisibility(View.INVISIBLE);
+
+                    biriki.setVisibility(View.VISIBLE);
+                    biruc.setVisibility(View.VISIBLE);
+                    birdort.setVisibility(View.VISIBLE);
+
+                    biriki.setText(String.valueOf(a));
+                    biruc.setText(String.valueOf(b));
+                    birdort.setText(String.valueOf(c));
+
+
+                }
+
+                if(str3 == 4 && stn3 == 2) {
+
+                    int b = Integer.parseInt(ikibir.getText().toString().trim());
+                    int c = Integer.parseInt(ucbir.getText().toString().trim());
+                    int d = Integer.parseInt(dortbir.getText().toString().trim());
+
+                    int e = Integer.parseInt(biriki.getText().toString().trim());
+                    int f = Integer.parseInt(ikiiki.getText().toString().trim());
+                    int g = Integer.parseInt(uciki.getText().toString().trim());
+                    int h = Integer.parseInt(dortiki.getText().toString().trim());
+
+                    ucbir.setVisibility(View.INVISIBLE);
+                    uciki.setVisibility(View.INVISIBLE);
+                    dortbir.setVisibility(View.INVISIBLE);
+                    dortiki.setVisibility(View.INVISIBLE);
+
+                    ikiuc.setVisibility(View.VISIBLE);
+                    ikidort.setVisibility(View.VISIBLE);
+                    biruc.setVisibility(View.VISIBLE);
+                    birdort.setVisibility(View.VISIBLE);
+
+                    biriki.setText(String.valueOf(b));
+                    biruc.setText(String.valueOf(c));
+                    birdort.setText(String.valueOf(d));
+                    ikibir.setText(String.valueOf(e));
+                    ikiiki.setText(String.valueOf(f));
+                    ikiuc.setText(String.valueOf(g));
+                    ikidort.setText(String.valueOf(h));
+
+
+                }
+
+                if(str3 == 4 && stn3 == 3) {
+
+                    int b = Integer.parseInt(ikibir.getText().toString().trim());
+                    int c = Integer.parseInt(ucbir.getText().toString().trim());
+                    int d = Integer.parseInt(dortbir.getText().toString().trim());
+
+                    int e = Integer.parseInt(biriki.getText().toString().trim());
+                    int f = Integer.parseInt(ikiiki.getText().toString().trim());
+                    int g = Integer.parseInt(uciki.getText().toString().trim());
+                    int h = Integer.parseInt(dortiki.getText().toString().trim());
+
+                    int i = Integer.parseInt(biruc.getText().toString().trim());
+                    int j = Integer.parseInt(ikiuc.getText().toString().trim());
+                    int k = Integer.parseInt(ucuc.getText().toString().trim());
+                    int l = Integer.parseInt(dortuc.getText().toString().trim());
+
+                    dortbir.setVisibility(View.INVISIBLE);
+                    dortiki.setVisibility(View.INVISIBLE);
+                    dortuc.setVisibility(View.INVISIBLE);
+
+                    ikidort.setVisibility(View.VISIBLE);
+                    ucdort.setVisibility(View.VISIBLE);
+                    birdort.setVisibility(View.VISIBLE);
+
+                    biriki.setText(String.valueOf(b));
+                    biruc.setText(String.valueOf(c));
+                    birdort.setText(String.valueOf(d));
+                    ikibir.setText(String.valueOf(e));
+                    ikiiki.setText(String.valueOf(f));
+                    ikiuc.setText(String.valueOf(g));
+                    ikidort.setText(String.valueOf(h));
+                    ucbir.setText(String.valueOf(i));
+                    uciki.setText(String.valueOf(j));
+                    ucuc.setText(String.valueOf(k));
+                    ucdort.setText(String.valueOf(l));
+
+
+                }
+
+                else if(str3 == 4 && stn3 == 4) {
+
+                    int b = Integer.parseInt(ikibir.getText().toString().trim());
+                    int c = Integer.parseInt(ucbir.getText().toString().trim());
+                    int d = Integer.parseInt(dortbir.getText().toString().trim());
+
+                    int e = Integer.parseInt(biriki.getText().toString().trim());
+                    int f = Integer.parseInt(ikiiki.getText().toString().trim());
+                    int g = Integer.parseInt(uciki.getText().toString().trim());
+                    int h = Integer.parseInt(dortiki.getText().toString().trim());
+
+                    int i = Integer.parseInt(biruc.getText().toString().trim());
+                    int j = Integer.parseInt(ikiuc.getText().toString().trim());
+                    int k = Integer.parseInt(ucuc.getText().toString().trim());
+                    int l = Integer.parseInt(dortuc.getText().toString().trim());
+
+                    int m = Integer.parseInt(birdort.getText().toString().trim());
+                    int n = Integer.parseInt(ikidort.getText().toString().trim());
+                    int o = Integer.parseInt(ucdort.getText().toString().trim());
+                    int p = Integer.parseInt(dortdort.getText().toString().trim());
+
+                    biriki.setText(String.valueOf(b));
+                    biruc.setText(String.valueOf(c));
+                    birdort.setText(String.valueOf(d));
+                    ikibir.setText(String.valueOf(e));
+                    ikiiki.setText(String.valueOf(f));
+                    ikiuc.setText(String.valueOf(g));
+                    ikidort.setText(String.valueOf(h));
+                    ucbir.setText(String.valueOf(i));
+                    uciki.setText(String.valueOf(j));
+                    ucuc.setText(String.valueOf(k));
+                    ucdort.setText(String.valueOf(l));
+                    dortbir.setText(String.valueOf(m));
+                    dortiki.setText(String.valueOf(n));
+                    dortuc.setText(String.valueOf(o));
+                    dortdort.setText(String.valueOf(p));
+
+
+                }
+
+                else if(str3 == 4 && stn3 == 5) {
+
+                    int b = Integer.parseInt(ikibir.getText().toString().trim());
+                    int c = Integer.parseInt(ucbir.getText().toString().trim());
+                    int d = Integer.parseInt(dortbir.getText().toString().trim());
+
+                    int e = Integer.parseInt(biriki.getText().toString().trim());
+                    int f = Integer.parseInt(ikiiki.getText().toString().trim());
+                    int g = Integer.parseInt(uciki.getText().toString().trim());
+                    int h = Integer.parseInt(dortiki.getText().toString().trim());
+
+                    int i = Integer.parseInt(biruc.getText().toString().trim());
+                    int j = Integer.parseInt(ikiuc.getText().toString().trim());
+                    int k = Integer.parseInt(ucuc.getText().toString().trim());
+                    int l = Integer.parseInt(dortuc.getText().toString().trim());
+
+                    int m = Integer.parseInt(birdort.getText().toString().trim());
+                    int n = Integer.parseInt(ikidort.getText().toString().trim());
+                    int o = Integer.parseInt(ucdort.getText().toString().trim());
+                    int p = Integer.parseInt(dortdort.getText().toString().trim());
+
+
+                    int r = Integer.parseInt(birbes.getText().toString().trim());
+                    int s = Integer.parseInt(ikibes.getText().toString().trim());
+                    int t = Integer.parseInt(ucbes.getText().toString().trim());
+                    int u = Integer.parseInt(dortbes.getText().toString().trim());
+
+                    birbes.setVisibility(View.INVISIBLE);
+                    ikibes.setVisibility(View.INVISIBLE);
+                    ucbes.setVisibility(View.INVISIBLE);
+                    dortbes.setVisibility(View.INVISIBLE);
+
+                    besbir.setVisibility(View.VISIBLE);
+                    besiki.setVisibility(View.VISIBLE);
+                    besuc.setVisibility(View.VISIBLE);
+                    besdort.setVisibility(View.VISIBLE);
+
+
+
+                    biriki.setText(String.valueOf(b));
+                    biruc.setText(String.valueOf(c));
+                    birdort.setText(String.valueOf(d));
+                    ikibir.setText(String.valueOf(e));
+                    ikiiki.setText(String.valueOf(f));
+                    ikiuc.setText(String.valueOf(g));
+                    ikidort.setText(String.valueOf(h));
+                    ucbir.setText(String.valueOf(i));
+                    uciki.setText(String.valueOf(j));
+                    ucuc.setText(String.valueOf(k));
+                    ucdort.setText(String.valueOf(l));
+                    dortbir.setText(String.valueOf(m));
+                    dortiki.setText(String.valueOf(n));
+                    dortuc.setText(String.valueOf(o));
+                    dortdort.setText(String.valueOf(p));
+                    besbir.setText(String.valueOf(m));
+                    besiki.setText(String.valueOf(n));
+                    besuc.setText(String.valueOf(o));
+                    besdort.setText(String.valueOf(p));
+
+                }
+
+                else if(str3 == 5 && stn3 == 1) {
+
+                    int b = Integer.parseInt(ikibir.getText().toString().trim());
+                    int c = Integer.parseInt(ucbir.getText().toString().trim());
+                    int d = Integer.parseInt(dortbir.getText().toString().trim());
+                    int e = Integer.parseInt(besbir.getText().toString().trim());
+
+                    ikibir.setVisibility(View.INVISIBLE);
+                    ucbir.setVisibility(View.INVISIBLE);
+                    dortbir.setVisibility(View.INVISIBLE);
+                    besbir.setVisibility(View.INVISIBLE);
+
+                    biriki.setVisibility(View.VISIBLE);
+                    biruc.setVisibility(View.VISIBLE);
+                    birdort.setVisibility(View.VISIBLE);
+                    birbes.setVisibility(View.VISIBLE);
+
+                    biriki.setText(String.valueOf(b));
+                    biruc.setText(String.valueOf(c));
+                    birdort.setText(String.valueOf(d));
+                    birbes.setText(String.valueOf(e));
+
+
+                }
+
+                else if(str3 == 5 && stn3 == 2) {
+
+                    int b = Integer.parseInt(ikibir.getText().toString().trim());
+                    int c = Integer.parseInt(ucbir.getText().toString().trim());
+                    int d = Integer.parseInt(dortbir.getText().toString().trim());
+                    int e = Integer.parseInt(besbir.getText().toString().trim());
+
+                    int f = Integer.parseInt(biriki.getText().toString().trim());
+                    int g = Integer.parseInt(ikiiki.getText().toString().trim());
+                    int h = Integer.parseInt(uciki.getText().toString().trim());
+                    int i = Integer.parseInt(dortiki.getText().toString().trim());
+                    int j = Integer.parseInt(besiki.getText().toString().trim());
+
+
+                    ucbir.setVisibility(View.INVISIBLE);
+                    uciki.setVisibility(View.INVISIBLE);
+                    dortbir.setVisibility(View.INVISIBLE);
+                    dortiki.setVisibility(View.INVISIBLE);
+                    besbir.setVisibility(View.INVISIBLE);
+                    besiki.setVisibility(View.INVISIBLE);
+
+                    biruc.setVisibility(View.VISIBLE);
+                    birdort.setVisibility(View.VISIBLE);
+                    birbes.setVisibility(View.VISIBLE);
+                    ikiuc.setVisibility(View.VISIBLE);
+                    ikidort.setVisibility(View.VISIBLE);
+                    ikibes.setVisibility(View.VISIBLE);
+
+                    biriki.setText(String.valueOf(b));
+                    biruc.setText(String.valueOf(c));
+                    birdort.setText(String.valueOf(d));
+                    birbes.setText(String.valueOf(e));
+
+                    ikibir.setText(String.valueOf(f));
+                    ikiiki.setText(String.valueOf(g));
+                    ikiuc.setText(String.valueOf(h));
+                    ikidort.setText(String.valueOf(i));
+                    ikibes.setText(String.valueOf(j));
+
+
+                }
+
+                else if(str3 == 5 && stn3 == 3) {
+
+                    int b = Integer.parseInt(ikibir.getText().toString().trim());
+                    int c = Integer.parseInt(ucbir.getText().toString().trim());
+                    int d = Integer.parseInt(dortbir.getText().toString().trim());
+                    int e = Integer.parseInt(besbir.getText().toString().trim());
+
+                    int f = Integer.parseInt(biriki.getText().toString().trim());
+                    int g = Integer.parseInt(ikiiki.getText().toString().trim());
+                    int h = Integer.parseInt(uciki.getText().toString().trim());
+                    int i = Integer.parseInt(dortiki.getText().toString().trim());
+                    int j = Integer.parseInt(besiki.getText().toString().trim());
+
+
+                    int k = Integer.parseInt(biruc.getText().toString().trim());
+                    int l = Integer.parseInt(ikiuc.getText().toString().trim());
+                    int m = Integer.parseInt(ucuc.getText().toString().trim());
+                    int n = Integer.parseInt(dortuc.getText().toString().trim());
+                    int o = Integer.parseInt(besuc.getText().toString().trim());
+
+
+                    dortuc.setVisibility(View.INVISIBLE);
+                    besuc.setVisibility(View.INVISIBLE);
+                    dortbir.setVisibility(View.INVISIBLE);
+                    dortiki.setVisibility(View.INVISIBLE);
+                    besbir.setVisibility(View.INVISIBLE);
+                    besiki.setVisibility(View.INVISIBLE);
+
+                    birdort.setVisibility(View.VISIBLE);
+                    birbes.setVisibility(View.VISIBLE);
+                    ikidort.setVisibility(View.VISIBLE);
+                    ikibes.setVisibility(View.VISIBLE);
+                    ucdort.setVisibility(View.VISIBLE);
+                    ucbes.setVisibility(View.VISIBLE);
+
+                    biriki.setText(String.valueOf(b));
+                    biruc.setText(String.valueOf(c));
+                    birdort.setText(String.valueOf(d));
+                    birbes.setText(String.valueOf(e));
+
+                    ikibir.setText(String.valueOf(f));
+                    ikiiki.setText(String.valueOf(g));
+                    ikiuc.setText(String.valueOf(h));
+                    ikidort.setText(String.valueOf(i));
+                    ikibes.setText(String.valueOf(j));
+
+                    ucbir.setText(String.valueOf(k));
+                    uciki.setText(String.valueOf(l));
+                    ucuc.setText(String.valueOf(m));
+                    ucdort.setText(String.valueOf(n));
+                    ucbes.setText(String.valueOf(o));
+
+                }
+
+                else if(str3 == 5 && stn3 == 4) {
+
+                    int b = Integer.parseInt(ikibir.getText().toString().trim());
+                    int c = Integer.parseInt(ucbir.getText().toString().trim());
+                    int d = Integer.parseInt(dortbir.getText().toString().trim());
+                    int e = Integer.parseInt(besbir.getText().toString().trim());
+
+                    int f = Integer.parseInt(biriki.getText().toString().trim());
+                    int g = Integer.parseInt(ikiiki.getText().toString().trim());
+                    int h = Integer.parseInt(uciki.getText().toString().trim());
+                    int i = Integer.parseInt(dortiki.getText().toString().trim());
+                    int j = Integer.parseInt(besiki.getText().toString().trim());
+
+
+                    int k = Integer.parseInt(biruc.getText().toString().trim());
+                    int l = Integer.parseInt(ikiuc.getText().toString().trim());
+                    int m = Integer.parseInt(ucuc.getText().toString().trim());
+                    int n = Integer.parseInt(dortuc.getText().toString().trim());
+                    int o = Integer.parseInt(besuc.getText().toString().trim());
+
+                    int p = Integer.parseInt(birdort.getText().toString().trim());
+                    int r = Integer.parseInt(ikidort.getText().toString().trim());
+                    int s = Integer.parseInt(ucdort.getText().toString().trim());
+                    int t = Integer.parseInt(dortdort.getText().toString().trim());
+                    int u = Integer.parseInt(besdort.getText().toString().trim());
+
+                    besuc.setVisibility(View.INVISIBLE);
+                    besbir.setVisibility(View.INVISIBLE);
+                    besiki.setVisibility(View.INVISIBLE);
+                    besdort.setVisibility(View.INVISIBLE);
+
+                    birbes.setVisibility(View.VISIBLE);
+                    ikibes.setVisibility(View.VISIBLE);
+                    ucbes.setVisibility(View.VISIBLE);
+                    dortbes.setVisibility(View.VISIBLE);
+
+                    biriki.setText(String.valueOf(b));
+                    biruc.setText(String.valueOf(c));
+                    birdort.setText(String.valueOf(d));
+                    birbes.setText(String.valueOf(e));
+
+                    ikibir.setText(String.valueOf(f));
+                    ikiiki.setText(String.valueOf(g));
+                    ikiuc.setText(String.valueOf(h));
+                    ikidort.setText(String.valueOf(i));
+                    ikibes.setText(String.valueOf(j));
+
+                    ucbir.setText(String.valueOf(k));
+                    uciki.setText(String.valueOf(l));
+                    ucuc.setText(String.valueOf(m));
+                    ucdort.setText(String.valueOf(n));
+                    ucbes.setText(String.valueOf(o));
+
+                    dortbir.setText(String.valueOf(p));
+                    dortiki.setText(String.valueOf(r));
+                    dortuc.setText(String.valueOf(s));
+                    dortdort.setText(String.valueOf(t));
+                    dortbes.setText(String.valueOf(u));
+
+                }
+
+                else if(str3 == 5 && stn3 == 5) {
+
+                    int b = Integer.parseInt(ikibir.getText().toString().trim());
+                    int c = Integer.parseInt(ucbir.getText().toString().trim());
+                    int d = Integer.parseInt(dortbir.getText().toString().trim());
+                    int e = Integer.parseInt(besbir.getText().toString().trim());
+
+                    int f = Integer.parseInt(biriki.getText().toString().trim());
+                    int g = Integer.parseInt(ikiiki.getText().toString().trim());
+                    int h = Integer.parseInt(uciki.getText().toString().trim());
+                    int i = Integer.parseInt(dortiki.getText().toString().trim());
+                    int j = Integer.parseInt(besiki.getText().toString().trim());
+
+                    int k = Integer.parseInt(biruc.getText().toString().trim());
+                    int l = Integer.parseInt(ikiuc.getText().toString().trim());
+                    int m = Integer.parseInt(ucuc.getText().toString().trim());
+                    int n = Integer.parseInt(dortuc.getText().toString().trim());
+                    int o = Integer.parseInt(besuc.getText().toString().trim());
+
+                    int p = Integer.parseInt(birdort.getText().toString().trim());
+                    int r = Integer.parseInt(ikidort.getText().toString().trim());
+                    int s = Integer.parseInt(ucdort.getText().toString().trim());
+                    int t = Integer.parseInt(dortdort.getText().toString().trim());
+                    int u = Integer.parseInt(besdort.getText().toString().trim());
+
+                    int w = Integer.parseInt(birbes.getText().toString().trim());
+                    int y = Integer.parseInt(ikibes.getText().toString().trim());
+                    int z = Integer.parseInt(ucbes.getText().toString().trim());
+                    int x = Integer.parseInt(dortbes.getText().toString().trim());
+                    int q = Integer.parseInt(besbes.getText().toString().trim());
+
+                    biriki.setText(String.valueOf(b));
+                    biruc.setText(String.valueOf(c));
+                    birdort.setText(String.valueOf(d));
+                    birbes.setText(String.valueOf(e));
+
+                    ikibir.setText(String.valueOf(f));
+                    ikiiki.setText(String.valueOf(g));
+                    ikiuc.setText(String.valueOf(h));
+                    ikidort.setText(String.valueOf(i));
+                    ikibes.setText(String.valueOf(j));
+
+                    ucbir.setText(String.valueOf(k));
+                    uciki.setText(String.valueOf(l));
+                    ucuc.setText(String.valueOf(m));
+                    ucdort.setText(String.valueOf(n));
+                    ucbes.setText(String.valueOf(o));
+
+                    dortbir.setText(String.valueOf(p));
+                    dortiki.setText(String.valueOf(r));
+                    dortuc.setText(String.valueOf(s));
+                    dortdort.setText(String.valueOf(t));
+                    dortbes.setText(String.valueOf(u));
+
+                    besbir.setText(String.valueOf(p));
+                    besiki.setText(String.valueOf(r));
+                    besuc.setText(String.valueOf(s));
+                    besdort.setText(String.valueOf(t));
+                    besbes.setText(String.valueOf(u));
+
+
+                }
+
+
+
+
+
+
+
+
+
+
+            }
+        });
+
+
 
 
 
