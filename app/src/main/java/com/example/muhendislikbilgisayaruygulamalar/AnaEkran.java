@@ -1446,7 +1446,7 @@ public class AnaEkran extends AppCompatActivity {
                 }
 
 
-
+            // commit please
 
 
 
