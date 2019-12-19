@@ -490,13 +490,8 @@ public class AnaEkran extends AppCompatActivity {
         });
 
 
-
-
-
-
-
             final List<Integer> integerList = new ArrayList<Integer>();
-            final TextView sonuc = (TextView) findViewById(R.id.textView11);
+                final TextView sonuc = (TextView) findViewById(R.id.textView11);
 
             final Button hesapla = (Button) findViewById(R.id.hesapla);
             hesapla.setOnClickListener(new View.OnClickListener() {
@@ -504,15 +499,15 @@ public class AnaEkran extends AppCompatActivity {
                 public void onClick(View v) {
                     try {
                         final int str2 = Integer.parseInt(satir.getText().toString().trim());
-                        final int stn2 = Integer.parseInt(sutun.getText().toString().trim());
+                            final int stn2 = Integer.parseInt(sutun.getText().toString().trim());
 
                         if (str2 == 1 && stn2 == 1) {
                             Toast.makeText(AnaEkran.this, "1x1 matrisin determinanti olamaz!", Toast.LENGTH_SHORT).show();
                         } else if (str2 == 2 && stn2 == 2) { // 2x2 matrisin determinanti
 
                             int a = Integer.parseInt(birbir.getText().toString());
-                            int b = Integer.parseInt(biriki.getText().toString());
-                            int c = Integer.parseInt(ikibir.getText().toString());
+                                int b = Integer.parseInt(biriki.getText().toString());
+                                int c = Integer.parseInt(ikibir.getText().toString());
                             int d = Integer.parseInt(ikiiki.getText().toString());
 
                             int determinant = (a * d) - (b * c);
